@@ -1,6 +1,6 @@
 self.addEventListener("push", e => {
   var options = {
-    body: "This notification was generated from a push!",
+    body: "A patient is ready for transport!",
     icon: "image/example.png",
     vibrate: [100, 50, 100],
     data: {
@@ -8,11 +8,11 @@ self.addEventListener("push", e => {
       primaryKey: "2"
     },
     actions: [
-      { action: "explore", title: "Explore this new world", icon: "images/checkmark.png" },
+      { action: "explore", title: "Accept", icon: "images/checkmark.png" },
       { action: "close", title: "Close", icon: "images/checkmark.png" },
     ]
   };
   e.waitUntil(
-    self.registration.showNotification("Hello World!", options )
+    self.registration.showNotification("Farahani,", options )
   );
 });
