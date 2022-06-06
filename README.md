@@ -1,1 +1,1 @@
-"# PushNotification" >> README.md
+# PushNotification >> README.md
