@@ -13,6 +13,6 @@ self.addEventListener("push", e => {
     ]
   };
   e.waitUntil(
-    self.registration.showNotification("Farahani,", options )
+    self.registration.showNotification("Farahani", options )
   );
 });
