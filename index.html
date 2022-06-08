@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="/manifest.json">
   <title>Document</title>
 </head>
 <body>
@@ -33,13 +34,41 @@
       }
     });
 
-    async function subscribe() {
-      let sw = await navigator.serviceWorker.ready;
-      let push = await sw.pushManager.subscribe({
-        userVisibleOnly: true,
-        applicationServerKey: 'BCFfkmzCBqVMYB178gdMLMwccmJYqCacTci-3YyHM8EoJGDZDuv1sbO3uiU82vN9qh1yVfxivCScDWGpC4k7gjE'
+    // async function subscribe() {
+    //   let sw = await navigator.serviceWorker.ready;
+    //   let push = await sw.pushManager.subscribe({
+    //     userVisibleOnly: true,
+    //     applicationServerKey: 'BCFfkmzCBqVMYB178gdMLMwccmJYqCacTci-3YyHM8EoJGDZDuv1sbO3uiU82vN9qh1yVfxivCScDWGpC4k7gjE'
+    //   });
+    //   console.log(JSON.stringify(push));
+    // }
+
+    function subscribe() {
+      var pushButton = document.querySelector(".js-push-button");
+      pushButton.disabled = true;
+
+      navigator.serviceWorker.ready.then(function(ServiceWorkerRegistration) {
+        serviceWorkerRegistration.pushManager.subscribe()
+          .then(function(subscription) {
+            isPushEnabled = true;
+            pushButton.textContent = "Disable Push Messages";
+            pushButton.disabled = false;
+            // TODO: Send the subscription.endpoint to your server
+            // and save it to send a push message at a later date
+            console.log(subscription);
+            //return sendSubscriptionToServer(subscription);
+          })
+          .catch(function(e) {
+            if(Notification.permission === "denied") {
+              console.warn("Permission for Notifications was denied");
+              pushButton.disabled = true;
+            } else {
+              console.error("Unable to subscribe to push.", e);
+              pushButton.disabled = false;
+              pushButton.textContent = "Enable Push Messages";
+            }
+          });
       });
-      console.log(JSON.stringify(push));
     }
 
     function initialiseState() {
