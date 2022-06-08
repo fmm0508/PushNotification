@@ -11,6 +11,19 @@
   <button class="js-push-button" disabled>Enable Push Messages</button>
 
   <script>
+    import { initializeApp } from "firebase/app";
+    const firebaseConfig = {
+      apiKey: "AIzaSyBJV4J1F68K20_Ulw3MkLr1VGMuilq9tik",
+      authDomain: "esystemspush.firebaseapp.com",
+      projectId: "esystemspush",
+      storageBucket: "esystemspush.appspot.com",
+      messagingSenderId: "319177733947",
+      appId: "1:319177733947:web:a25577f3bc46529935291e"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    
     var employeeID = 346985;
     var PIN = 1234;
     var isPushEnabled = false;
